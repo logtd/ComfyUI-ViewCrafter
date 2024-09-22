@@ -1,0 +1,1018 @@
+{
+  "last_node_id": 109,
+  "last_link_id": 243,
+  "nodes": [
+    {
+      "id": 43,
+      "type": "CLIPVisionLoader",
+      "pos": {
+        "0": 2597,
+        "1": 416
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP_VISION",
+          "type": "CLIP_VISION",
+          "links": [
+            234
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPVisionLoader"
+      },
+      "widgets_values": [
+        "open_clip_pytorch_model.bin"
+      ]
+    },
+    {
+      "id": 48,
+      "type": "VAEDecode",
+      "pos": {
+        "0": 3756,
+        "1": 503
+      },
+      "size": {
+        "0": 140,
+        "1": 54.43859100341797
+      },
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 206
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 144
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            177
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      }
+    },
+    {
+      "id": 49,
+      "type": "VHS_VideoCombine",
+      "pos": {
+        "0": 3979,
+        "1": 506
+      },
+      "size": [
+        577.0924072265625,
+        950.7289581298828
+      ],
+      "flags": {},
+      "order": 18,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 178
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": null
+        },
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "Filenames",
+          "type": "VHS_FILENAMES",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_VideoCombine"
+      },
+      "widgets_values": {
+        "frame_rate": 7,
+        "loop_count": 0,
+        "filename_prefix": "ViewCrafter",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 20,
+        "save_metadata": false,
+        "pingpong": false,
+        "save_output": false,
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "filename": "ViewCrafter_00040.mp4",
+            "subfolder": "",
+            "type": "temp",
+            "format": "video/h264-mp4",
+            "frame_rate": 7
+          }
+        }
+      }
+    },
+    {
+      "id": 51,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 3154,
+        "1": 946
+      },
+      "size": {
+        "0": 400,
+        "1": 200
+      },
+      "flags": {
+        "collapsed": true
+      },
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 243
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            204
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 57,
+      "type": "LoadViewCrafter",
+      "pos": {
+        "0": 2600,
+        "1": 254
+      },
+      "size": {
+        "0": 210,
+        "1": 102
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            233
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "image_proj_model",
+          "type": "IMAGE_PROJ_MODEL",
+          "links": [
+            236
+          ],
+          "slot_index": 1,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadViewCrafter"
+      },
+      "widgets_values": [
+        "viewcrafter_25.ckpt",
+        "fp16"
+      ]
+    },
+    {
+      "id": 50,
+      "type": "CLIPTextEncode",
+      "pos": {
+        "0": 3014,
+        "1": 648
+      },
+      "size": {
+        "0": 330.21746826171875,
+        "1": 138.6229248046875
+      },
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 242
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            203
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "Rotating view of a scene"
+      ]
+    },
+    {
+      "id": 82,
+      "type": "EmptyLatentImage",
+      "pos": {
+        "0": 3525,
+        "1": 943
+      },
+      "size": {
+        "0": 210,
+        "1": 106
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            193
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1024,
+        576,
+        25
+      ]
+    },
+    {
+      "id": 88,
+      "type": "ImageConcanate",
+      "pos": {
+        "0": 3822,
+        "1": 325
+      },
+      "size": {
+        "0": 210,
+        "1": 102
+      },
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image1",
+          "type": "IMAGE",
+          "link": 227
+        },
+        {
+          "name": "image2",
+          "type": "IMAGE",
+          "link": 177
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            178
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageConcanate"
+      },
+      "widgets_values": [
+        "down",
+        false
+      ]
+    },
+    {
+      "id": 86,
+      "type": "VAEEncode",
+      "pos": {
+        "0": 2953,
+        "1": 430
+      },
+      "size": {
+        "0": 140,
+        "1": 46
+      },
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 226
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 167
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            235
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      }
+    },
+    {
+      "id": 76,
+      "type": "VAELoader",
+      "pos": {
+        "0": 2596,
+        "1": 528
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            144,
+            167
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "vae-ft-mse-840000-ema-pruned.safetensors"
+      ]
+    },
+    {
+      "id": 106,
+      "type": "ApplyViewCrafter",
+      "pos": {
+        "0": 3163,
+        "1": 257
+      },
+      "size": {
+        "0": 210,
+        "1": 138
+      },
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 233
+        },
+        {
+          "name": "clip_vision",
+          "type": "CLIP_VISION",
+          "link": 234
+        },
+        {
+          "name": "latents",
+          "type": "LATENT",
+          "link": 235
+        },
+        {
+          "name": "image_proj_model",
+          "type": "IMAGE_PROJ_MODEL",
+          "link": 236
+        },
+        {
+          "name": "clip_image",
+          "type": "IMAGE",
+          "link": 237
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            238
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ApplyViewCrafter"
+      },
+      "widgets_values": [
+        10
+      ]
+    },
+    {
+      "id": 45,
+      "type": "CLIPLoader",
+      "pos": {
+        "0": 2600,
+        "1": 638
+      },
+      "size": {
+        "0": 210,
+        "1": 82
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            241
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "open_clip_pytorch_model.bin",
+        "stable_diffusion"
+      ]
+    },
+    {
+      "id": 107,
+      "type": "CLIPSetLastLayer",
+      "pos": {
+        "0": 2612,
+        "1": 788
+      },
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 241
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            242,
+            243
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPSetLastLayer"
+      },
+      "widgets_values": [
+        -2
+      ]
+    },
+    {
+      "id": 101,
+      "type": "VHS_LoadVideo",
+      "pos": {
+        "0": 2575,
+        "1": -222
+      },
+      "size": [
+        235.1999969482422,
+        396.7511093987359
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "meta_batch",
+          "type": "VHS_BatchManager",
+          "link": null
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            224
+          ],
+          "slot_index": 0,
+          "shape": 3
+        },
+        {
+          "name": "frame_count",
+          "type": "INT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "video_info",
+          "type": "VHS_VIDEOINFO",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_LoadVideo"
+      },
+      "widgets_values": {
+        "video": "output_top_left.mp4",
+        "force_rate": 0,
+        "force_size": "Disabled",
+        "custom_width": 512,
+        "custom_height": 512,
+        "frame_load_cap": 25,
+        "skip_first_frames": 1,
+        "select_every_nth": 3,
+        "choose video to upload": "image",
+        "videopreview": {
+          "hidden": false,
+          "paused": false,
+          "params": {
+            "frame_load_cap": 25,
+            "skip_first_frames": 1,
+            "force_rate": 0,
+            "filename": "output_top_left.mp4",
+            "type": "input",
+            "format": "video/mp4",
+            "select_every_nth": 3
+          },
+          "muted": false
+        }
+      }
+    },
+    {
+      "id": 104,
+      "type": "ImageScale",
+      "pos": {
+        "0": 2872,
+        "1": -236
+      },
+      "size": {
+        "0": 210,
+        "1": 146.81936645507812
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 224
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            225,
+            226,
+            227
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ImageScale"
+      },
+      "widgets_values": [
+        "nearest-exact",
+        1024,
+        576,
+        "disabled"
+      ]
+    },
+    {
+      "id": 102,
+      "type": "VHS_SelectImages",
+      "pos": {
+        "0": 2867,
+        "1": -43
+      },
+      "size": {
+        "0": 214.8000030517578,
+        "1": 106
+      },
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 225
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            237
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VHS_SelectImages"
+      },
+      "widgets_values": {
+        "indexes": "0",
+        "err_if_missing": true,
+        "err_if_empty": true
+      }
+    },
+    {
+      "id": 47,
+      "type": "KSampler",
+      "pos": {
+        "0": 3530,
+        "1": 628
+      },
+      "size": {
+        "0": 210,
+        "1": 262
+      },
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 238
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 203
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 204
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 193
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            206
+          ],
+          "slot_index": 0,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        4,
+        "fixed",
+        20,
+        7.5,
+        "euler",
+        "normal",
+        1
+      ]
+    },
+    {
+      "id": 108,
+      "type": "Note",
+      "pos": {
+        "0": 3388,
+        "1": -361
+      },
+      "size": [
+        445.9089660644531,
+        307.0606994628906
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Notes:\n\nstride -- a frame stride of 10 is default for ViewCrafter, but changing the value can work better for other videos\n\nprompt -- \"Rotating view of a scene\" is fixed in their code and may have been only trained with this prompt\n\nclip_image -- Trained only using the first image from the video (or the last), but you can put 25 (or 16) in if you want\n\nclip_vision -- this is the SD2 clip\n\nclip -- this is the SD2 clip\n\nVAE -- this the the SD1.5 VAE (also used for SD2)\n\nControlNets for SD2 may work but have not been tested\n\nsteps -- You can adjust the steps, I just chose 20 for testing\n"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 109,
+      "type": "Note",
+      "pos": {
+        "0": 4106,
+        "1": 309
+      },
+      "size": [
+        466.86968994140625,
+        113.78831481933594
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": [
+        "Color change:\n\nThe color from the first frame is slightly different than the rest of the video. This appears to be slightly more of an issue in this Comfy implementation than original. \n\nYou can use a color matching node (e.g. one from KJNodes) if you need."
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      144,
+      76,
+      0,
+      48,
+      1,
+      "VAE"
+    ],
+    [
+      167,
+      76,
+      0,
+      86,
+      1,
+      "VAE"
+    ],
+    [
+      177,
+      48,
+      0,
+      88,
+      1,
+      "IMAGE"
+    ],
+    [
+      178,
+      88,
+      0,
+      49,
+      0,
+      "IMAGE"
+    ],
+    [
+      193,
+      82,
+      0,
+      47,
+      3,
+      "LATENT"
+    ],
+    [
+      203,
+      50,
+      0,
+      47,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      204,
+      51,
+      0,
+      47,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      206,
+      47,
+      0,
+      48,
+      0,
+      "LATENT"
+    ],
+    [
+      224,
+      101,
+      0,
+      104,
+      0,
+      "IMAGE"
+    ],
+    [
+      225,
+      104,
+      0,
+      102,
+      0,
+      "IMAGE"
+    ],
+    [
+      226,
+      104,
+      0,
+      86,
+      0,
+      "IMAGE"
+    ],
+    [
+      227,
+      104,
+      0,
+      88,
+      0,
+      "IMAGE"
+    ],
+    [
+      233,
+      57,
+      0,
+      106,
+      0,
+      "MODEL"
+    ],
+    [
+      234,
+      43,
+      0,
+      106,
+      1,
+      "CLIP_VISION"
+    ],
+    [
+      235,
+      86,
+      0,
+      106,
+      2,
+      "LATENT"
+    ],
+    [
+      236,
+      57,
+      1,
+      106,
+      3,
+      "IMAGE_PROJ_MODEL"
+    ],
+    [
+      237,
+      102,
+      0,
+      106,
+      4,
+      "IMAGE"
+    ],
+    [
+      238,
+      106,
+      0,
+      47,
+      0,
+      "MODEL"
+    ],
+    [
+      241,
+      45,
+      0,
+      107,
+      0,
+      "CLIP"
+    ],
+    [
+      242,
+      107,
+      0,
+      50,
+      0,
+      "CLIP"
+    ],
+    [
+      243,
+      107,
+      0,
+      51,
+      0,
+      "CLIP"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.41772481694165453,
+      "offset": [
+        -1976.9542848285262,
+        966.2083244462995
+      ]
+    }
+  },
+  "version": 0.4
+}
