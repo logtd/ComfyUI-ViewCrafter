@@ -18,3 +18,6 @@ https://github.com/user-attachments/assets/bb1b1d1f-0801-46be-860b-b73dfaf99d80
 
 https://github.com/user-attachments/assets/03311f52-996f-4b52-8d1b-1f718162b365
 
+## Acknowledgements
+
+Thanks to [ExponentialML](https://github.com/ExponentialML/ComfyUI_Native_DynamiCrafter) for his implementation of DynamiCrafter.
