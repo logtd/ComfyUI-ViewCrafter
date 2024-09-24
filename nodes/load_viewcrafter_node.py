@@ -25,7 +25,8 @@ class LoadViewCrafterNode:
         return {
             "required": {
                 "model_path": (get_models_directory(os.listdir(MODEL_DIR_PATH)), ),
-                "precision": (["fp16", "fp32"],)
+                "precision": (["fp16", "fp32"],),
+                "zsnr": ("BOOLEAN", { "default": False }),
             },
         }
         
@@ -66,7 +67,7 @@ class LoadViewCrafterNode:
         if len(left_over) > 0:
             print("left over keys:", left_over)
 
-    def load_viewcrafter(self, model_path, precision):
+    def load_viewcrafter(self, model_path, precision, zsnr):
         model_path = os.path.join(MODEL_DIR_PATH, model_path)
         precision = torch.float32 if precision == 'fp32' else torch.float16
         
@@ -105,6 +106,6 @@ class LoadViewCrafterNode:
             )
 
         model_patcher, = RescaleCFG().patch(model_patcher, 0.7)
-        model_patcher, = ModelSamplingDiscrete().patch(model_patcher, "v_prediction", True)
+        model_patcher, = ModelSamplingDiscrete().patch(model_patcher, "v_prediction", zsnr)
     
         return (model_patcher, image_proj_model, )

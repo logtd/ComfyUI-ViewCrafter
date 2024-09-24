@@ -54,7 +54,7 @@ class ApplyViewCrafterNode:
                 "image_proj_model": ("IMAGE_PROJ_MODEL", ),
                 "clip_image": ("IMAGE", ),
                 "stride": ("INT", {"default": 10, "min": 0, "max": 30, "step": 1}, ),
-                # "scale_image": ("BOOLEAN", { "default": True })
+                "scale_image": ("BOOLEAN", { "default": False })
             },
         }
         
@@ -72,7 +72,7 @@ class ApplyViewCrafterNode:
         image_proj_model, 
         clip_image, 
         stride,
-        scale_image=True,
+        scale_image=False,
     ):
         model = model.clone()
         if scale_image:
